@@ -1,0 +1,10 @@
+@import url('tldraw/tldraw.css');
+
+* {
+	box-sizing: border-box;
+	overscroll-behavior: none;
+}
+
+body {
+	margin: 0;
+}

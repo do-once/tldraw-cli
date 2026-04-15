@@ -1,0 +1,61 @@
+{
+	"name": "@doonce/tldraw-cli",
+	"version": "0.0.0",
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"type": "module",
+	"bin": {
+		"tldraw-cli": "dist/cli.mjs"
+	},
+	"files": [
+		"dist",
+		"skill"
+	],
+	"scripts": {
+		"build": "npm run build:client && npm run build:cli",
+		"build:client": "vite build",
+		"build:cli": "vite build --config vite.config.cli.ts",
+		"dev": "tsx cli/main.ts start --dev",
+		"dev:client": "vite",
+		"dev:host": "tsx host/HostProcess.ts",
+		"cli": "tsx cli/main.ts",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:e2e": "npx playwright test --config playwright.config.ts",
+		"release": "npm run build && npx changeset publish",
+		"codegen": "tsx scripts/codegen/generate-tldraw-enums.ts",
+		"codegen:check": "npm run codegen && git diff --exit-code shared/rpc/generated skill/tldraw-cli/references/generated"
+	},
+	"dependencies": {
+		"@stricli/core": "^1.2.6",
+		"react": "^19.2.1",
+		"react-dom": "^19.2.1",
+		"tldraw": "^4.5.9",
+		"ws": "^8.18.0",
+		"zod": "^4.1.8"
+	},
+	"devDependencies": {
+		"@changesets/changelog-github": "^0.6.0",
+		"@changesets/cli": "^2.30.0",
+		"@playwright/test": "^1.58.0",
+		"@types/node": "^22.9.0",
+		"@types/react": "^19.2.7",
+		"@types/react-dom": "^19.2.3",
+		"@types/ws": "^8.5.13",
+		"@vitejs/plugin-react-swc": "^4.3.0",
+		"tsx": "^4.20.5",
+		"typescript": "^5.8.3",
+		"vite": "^8.0.8",
+		"vitest": "^3.2.4"
+	},
+	"optionalDependencies": {
+		"@swc/core-darwin-arm64": "^1.15.26",
+		"@swc/core-darwin-x64": "^1.15.26",
+		"@swc/core-linux-x64-gnu": "^1.15.26",
+		"@swc/core-linux-arm64-gnu": "^1.15.26",
+		"@swc/core-win32-x64-msvc": "^1.15.26"
+	}
+}
